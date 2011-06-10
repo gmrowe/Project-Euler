@@ -82,7 +82,7 @@ object Problem102 {
       nums match {
         case (p1X::p1Y::p2X::p2Y::p3X::p3Y::_) =>
           Triangle(Point(p1X, p1Y), Point(p2X, p2Y), Point(p3X, p3Y))
-        case _ => error("Parse error parsing Ttiangle file")
+        case _ => sys.error("Parse error parsing Ttiangle file")
       }
     }
     

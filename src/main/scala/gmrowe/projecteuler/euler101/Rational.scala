@@ -14,7 +14,7 @@ trait Rational {
 object Rational {
   
   def rational(n: Long, d: Long): Rational = {
-    if (d == 0) error("zero denominator")
+    if (d == 0) sys.error("zero denominator")
     else if (n == 0) Zero
     else new NonZeroRational(n, d)
   }
@@ -30,7 +30,7 @@ object Rational {
     }
     def *(o: Rational): Rational = this
     def /(o: Rational): Rational = this
-    def reciprocal: Rational = error("reciprocal of zero is undefined")
+    def reciprocal: Rational = sys.error("reciprocal of zero is undefined")
     def numerator: Long = 0
     def denominator: Long = 1
     override def toString: String = "Rational(0)"
@@ -77,7 +77,7 @@ object Rational {
     }    
 
     def /(o: Rational): Rational = o match {
-      case Zero => error("division by zero")
+      case Zero => sys.error("division by zero")
       case _    => rational(numerator * o.denominator,
            denominator * o.numerator)
     }

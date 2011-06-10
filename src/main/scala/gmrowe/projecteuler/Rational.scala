@@ -85,7 +85,7 @@ object Rational {
   implicit def IntToRational(i: Int): Rational = apply(i)
   
   def apply(n: Int, d: Int): Rational = 
-   if (d == 0) error("Rational with denominator 0 is undefined") 
+   if (d == 0) sys.error("Rational with denominator 0 is undefined") 
    else new Rational(n, d)
    
   def apply(n: Int): Rational = apply(n, 1)

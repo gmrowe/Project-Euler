@@ -9,7 +9,7 @@ object Problem193 {
     def lp(e: Long, acc: Long): Long = {
       if (e == 0) acc else lp(e - 1, acc * base)
     }
-    if (exp < 0) error("Undefined for negative powers") else lp(exp, 1)
+    if (exp < 0) sys.error("Undefined for negative powers") else lp(exp, 1)
   }
   
   lazy val squareOfPrimes : Stream[Int] =  {
