@@ -135,7 +135,7 @@ class EulerUtilsSpec extends Specification {
    
    "EulerUtils.primesBelow" should {
       "produce a sorted list of all prime numbers less than the arg value" in {
-         primesBelow(40) mustEqual List(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
+         primesBelow(40) == List(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37) must beTrue
       }
    }
    
