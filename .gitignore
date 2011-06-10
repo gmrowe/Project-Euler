@@ -1,0 +1,10 @@
+#jEdit temp files
+*~
+
+#sbt stuff
+target/
+lib_managed/
+src_managed/
+project/boot/
+lib/
+

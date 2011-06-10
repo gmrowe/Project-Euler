@@ -1,0 +1,86 @@
+package gmrowe.projecteuler
+
+import Suits._
+import Ranks._
+import PokerEval.score
+import _root_.gmrowe.projecteuler.util.FileParser
+
+object Problem54 {
+
+   def stringToRank(s: String): Rank = {
+      s match {
+         case "A" => Ace
+         case "K" => King
+         case "Q" => Queen
+         case "J" => Jack
+         case "T" => Ten
+         case "9" => Nine
+         case "8" => Eight
+         case "7" => Seven
+         case "6" => Six
+         case "5" => Five
+         case "4" => Four
+         case "3" => Three
+         case "2" => Deuce
+      }
+   }
+   
+   def stringToSuit(s: String): Suit = {
+      s match {
+         case "S" => Spades
+         case "H" => Hearts
+         case "D" => Diamonds
+         case "C" => Clubs
+      }
+   }
+
+   def hands: List[(List[Card], List[Card])] = {
+      val handSize = 5
+      
+      def parseCard(in: String): Card = {
+         val rank = stringToRank(in.substring(0, 1))
+         val suit = stringToSuit(in.substring(1))
+         Card(rank, suit)
+      }
+         
+      def parse(in: String): (List[Card], List[Card]) = {
+         val toks = in.split("\\s+")
+         val p1 = toks.slice(0, handSize).toList
+         val p2 = toks.slice(handSize, toks.length).toList
+         val p1Hand = p1.map (parseCard(_))
+         val p2Hand = p2.map (parseCard(_))
+         (p1Hand, p2Hand)
+      }
+       
+      val parser = new FileParser { def file = "test_cases.txt" }
+      
+      parser.parseAll(parse(_))
+   }
+   
+   def doIt(hands: List[(List[Card], List[Card])]): Int = {
+      var player1Wins = 0
+      hands.foreach { case (p1, p2) => 
+         if (score(p1: _*).value < score(p2: _*).value) {
+            player1Wins += 1
+         }
+      }
+      player1Wins
+   }
+   
+   def time(f: => Unit): Long  = {
+      val start = System.currentTimeMillis
+      f
+      val end = System.currentTimeMillis
+      end - start
+   }
+   
+   def main(args: Array[String]) {
+      val theHands = hands
+      var num = 0
+      val millis = time (num = doIt(theHands))
+      println("Player1 wins: " + num)
+      println("Time elpsed: " + millis + "ms")
+   }
+         
+      
+}
